@@ -3,7 +3,7 @@ Heroku buildpack: MeCab, GSL and SQLite3
 
 This is a buildpack that enables using the [mecab gem](https://rubygems.org/gems/mecab) and [Ruby/GSL gem](https://rubygems.org/gems/rb-gsl) and [sqlite3 gem](https://github.com/sparklemotion/sqlite3-ruby) on Heroku Cedar. This buildpack was forked from [heroku-buildpack-gsl-ruby](https://github.com/tomwolfe/heroku-buildpack-gsl-ruby). A big thank you to [jkatzer](https://github.com/jkatzer) who did 99.9% of the work to adapt the fork to get MeCab working on Heroku. Any mistakes are purely my own. Also thanks to [Tomasz](https://github.com/tomasz-buchta) for adding the sqlite3 gem.
 
-To get MeCab and GSL working together on Heroku follow these steps:
+To get MeCab, GSL and SQlite3 gems working together on Heroku follow these steps:
 
 1) Add the [mecab gem](https://rubygems.org/gems/mecab) and the [rb-gsl gem](https://rubygems.org/gems/rb-gsl) and [sqlite3 gem](https://github.com/sparklemotion/sqlite3-ruby) to your Gemfile and run bundle install  
 `gem 'mecab', '0.996'`  
@@ -14,9 +14,10 @@ To get MeCab and GSL working together on Heroku follow these steps:
 2) Add the following config variables to your Heroku app  
 `$ heroku config:set BUILDPACK_URL=https://github.com/TM-Town/heroku-buildpack-mecab-gsl-sqlite.git`  
 `$ heroku config:set LD_LIBRARY_PATH=/app/vendor/gsl-1/lib:/app/vendor/mecab/lib`  
+
 3) Add a myvendor folder to the root of your app with the `sqlite-autoconf-3080803.tar.gz` file inside
 
-4) Add the folder heroku_buildpack_scripts and a symlink folder hbs linking to that folder. Inside the heroku_buildpack_scripts show be a bash script `dothis.bash`
+4) Add the folder heroku_buildpack_scripts and a symlink folder hbs linking to that folder to the root of your app. Inside the heroku_buildpack_scripts show be a bash script `dothis.bash`
 
 ```
 #!/bin/bash
